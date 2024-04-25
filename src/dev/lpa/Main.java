@@ -24,14 +24,11 @@ public class Main {
 
     private static class StatsVisitor extends SimpleFileVisitor<Path>{
 
-        // implicitly initialized to 0
-        private int level;
 
         @Override
         public FileVisitResult visitFile(Path file, BasicFileAttributes attrs) throws IOException {
             Objects.requireNonNull(file);
             Objects.requireNonNull(attrs);
-            System.out.println("\t".repeat(level) + file.getFileName());
             return FileVisitResult.CONTINUE;
         }
 
@@ -41,9 +38,6 @@ public class Main {
             Objects.requireNonNull(dir);
             Objects.requireNonNull(attrs);
 
-            // inc when visiting dir
-            level++;
-            System.out.println("\t".repeat(level) + dir.getFileName());
             return FileVisitResult.CONTINUE;
         }
 
@@ -52,7 +46,6 @@ public class Main {
             Objects.requireNonNull(dir);
 //            if (exc != null)
 //                throw exc;
-            level--;
             return FileVisitResult.CONTINUE;
         }
     }
